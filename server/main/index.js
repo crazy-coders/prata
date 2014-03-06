@@ -22,7 +22,6 @@ app.configure('development', function() {
 
 app.configure(function() {
   app.use(express.static('public'));
-  app.use(express.cookieParser());
   app.use(app.router);
   app.use(api);
 
