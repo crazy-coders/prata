@@ -3,7 +3,8 @@ var express = require('express'),
     app = exports.app = express(),
     server = http.createServer(app),
     winston = require('winston'),
-    config = require('../config');
+    config = require('../config'),
+    api = require('../api');
 
 
 app.configure('production', 'development', function() {
@@ -23,6 +24,7 @@ app.configure(function() {
   app.use(express.static('public'));
   app.use(express.cookieParser());
   app.use(app.router);
+  app.use(api);
 
   app.set('views', __dirname + '/views');
   app.engine('html', require('ejs').renderFile);
