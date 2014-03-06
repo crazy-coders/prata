@@ -1,0 +1,1 @@
+window.Prata = Ember.Application.create();
