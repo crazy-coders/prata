@@ -1,0 +1,36 @@
+{
+  "name": "prata",
+  "version": "0.0.1",
+  "description": "",
+  "main": "server/main/index.js",
+  "scripts": {
+    "start": "node ./server/main/index",
+    "test": "NODE_ENV=testing mocha -R spec --recursive server"
+  },
+  "author": "",
+  "contributors": [
+    {
+      "name": "Johan Stenehall",
+      "email": "stenehall@gmail.com"
+    },
+    {
+      "name": "Emil Karlsson",
+      "email": "emil.karl@gmail.com"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xxx/xxx.git"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "express": "^3.4.8",
+    "passport": "^0.2.0",
+    "winston": "^0.7.2",
+    "ejs": "^0.8.5",
+    "kaskade": "^1.0.0"
+  },
+  "devDependencies": {
+    "chai": "^1.9.0"
+  }
+}

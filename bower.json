@@ -1,0 +1,19 @@
+{
+  "name": "prata",
+  "version": "0.0.1",
+  "authors": [
+    "Johan Stenehall <stenehall@gmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "ember": "~1.4.0"
+  }
+}
