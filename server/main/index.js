@@ -27,8 +27,8 @@ app.configure(function() {
   app.set('views', __dirname + '/views');
   app.engine('html', require('ejs').renderFile);
 
-  app.use(express.static(__dirname + '/client'));
-  app.use(express.static(__dirname + '/bower_components'));
+  app.use(express.static(__dirname + '/../../client'));
+  app.use(express.static(__dirname + '/../../bower_components'));
 });
 
 app.get('/', function(req, res) {
