@@ -23,7 +23,7 @@ app.configure('development', function() {
 app.configure(function() {
   app.use(express.static('public'));
   app.use(app.router);
-  app.use(api);
+  app.use('/api', api);
 
   app.set('views', __dirname + '/views');
   app.engine('html', require('ejs').renderFile);
