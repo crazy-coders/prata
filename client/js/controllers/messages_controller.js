@@ -1,4 +1,6 @@
 Prata.MessagesController = Ember.ArrayController.extend({
+  sortProperties: ['id'],
+  sortAscending: false,
   actions: {
     createMessage: function() {
       // Get the todo title set by the "New Message" text field
