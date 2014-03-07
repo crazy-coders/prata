@@ -28,7 +28,8 @@
     "passport": "^0.2.0",
     "winston": "^0.7.2",
     "ejs": "^0.8.5",
-    "kaskade": "^1.0.0"
+    "kaskade": "^1.0.0",
+    "parse": "^1.2.17"
   },
   "devDependencies": {
     "chai": "^1.9.0"
