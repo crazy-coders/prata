@@ -9,17 +9,35 @@
   <script src="/handlebars/handlebars.js"></script>
   
   <body>
-    <script type="text/x-handlebars">
-      <section id="todoapp">
+    <script type="text/x-handlebars" data-template-name="messages">
+      <section id="prataapp">
         <header id="header">
           <h1>prata</h1>
+          {{textarea id="new-message" placeholder="What needs to be told?" value=newMessage action="createMessage"}}
         </header>
+        
+        <section id="main">
+          <div id="message-list">
+            {{#each}}
+              <div>
+                <p><strong>{{user.name}}</strong></p>
+                <p>{{message}}</p>
+              </div>
+            {{/each}}
+          </div>
+        </section>
+        
       </section>
     </script>
     
+
     <!-- ... Ember.js and other javascript dependencies ... -->
     <script src="/ember/ember.js"></script>
+    <script src="/ember-data/ember-data.js"></script>
     <script src="/js/application.js"></script>
-    
+    <script src="/js/router.js"></script>
+    <script src="/js/models/message.js"></script>
+    <script src="/js/models/user.js"></script>
+    <script src="/js/controllers/messages_controller.js"></script>
   </body>
 </html>
