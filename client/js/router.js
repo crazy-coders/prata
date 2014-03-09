@@ -1,5 +1,25 @@
+
+
+
+// Prata.MessagesRoute = Ember.Route.extend({
+//   model: function() {
+//     return this.store.find('message');
+//   }
+// });
+
+// Prata.UsersRoute = Ember.Route.extend({
+//   model: function() {
+//     return this.store.find('message');
+//   }
+// });
+
+
+/*
+
 Prata.Router.map(function () {
-  this.resource('messages', { path: '/' });
+  this.resource('main', {path: '/'});
+  this.resource('messages');
+  this.resource('users');
 });
 
 Prata.MessagesRoute = Ember.Route.extend({
@@ -7,3 +27,5 @@ Prata.MessagesRoute = Ember.Route.extend({
     return this.store.find('message');
   }
 });
+
+*/
