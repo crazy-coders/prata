@@ -1,6 +1,6 @@
 Prata.User = DS.Model.extend({
   name: DS.attr('string'),
-  messages: DS.hasMany('message')
+  messages: DS.hasMany('message', {async: true})
 });
 
 Prata.User.FIXTURES = [
