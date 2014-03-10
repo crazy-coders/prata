@@ -10,7 +10,7 @@ Prata.MessagesController = Ember.ArrayController.extend({
       // Create the new Message model
       var store = this.store;
 
-      var m = Prata.Message.createRecord({
+      var m = store.createRecord('message', {
         message: messageText,
         createdAt: new Date()
       });
