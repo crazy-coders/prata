@@ -5,31 +5,40 @@
     <title>Prata • CrazyCoders</title>
   </head>
 
+  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.4.2/pure-min.css">
+  <link rel="stylesheet" href="/css/prata.css">
+
   <script src="/jquery/jquery.min.js"></script>
   <script src="/handlebars/handlebars.js"></script>
-  
+
   <body>
     <script type="text/x-handlebars" data-template-name="messages">
       <section id="prataapp">
         <header id="header">
           <h1>prata</h1>
-          {{textarea id="new-message" placeholder="What needs to be told?" value=newMessage action="createMessage"}}
+              {{input id="new-message" class="pure-input-2-3" placeholder="What needs to be told?" value=newMessage action="createMessage"}}
+            <button type="submit" class="pure-button pure-button-primary">Sign in</button>
         </header>
-        
+
         <section id="main">
-          <div id="message-list">
+          <ul id="message-list" class="message-list">
             {{#each}}
-              <div>
+              <li class="user-1">
                 <p><strong>{{user.username}}</strong></p>
                 <p>{{message}}</p>
-              </div>
+              </li>
             {{/each}}
-          </div>
+          </ul>
         </section>
-        
+
       </section>
     </script>
-    
+
+    <script type="text/x-handlebars">
+      <div class="content">
+        {{outlet}}
+      </div>
+    </script>
 
     <!-- ... Ember.js and other javascript dependencies ... -->
     <script src="/ember/ember.js"></script>

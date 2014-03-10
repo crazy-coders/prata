@@ -1,0 +1,42 @@
+.content {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 50px;
+    padding-left: 1em;
+    padding-right: 1em;
+    max-width: 768px;
+}
+
+.message-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+
+  p {
+    margin: 0;
+    padding: 0 0 1em;
+  }
+
+  li {
+    padding: 0 1em;
+    border-bottom: 1px solid #ddd;
+    border-left: 6px solid transparent;
+  }
+
+  .user-1 {
+    border-left-color: #1b98f8;
+  }
+}
+
+input[type=text] {
+  width: 75%;
+  padding: .5em .6em;
+  margin-bottom: 20px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-shadow: inset 0 1px 3px #ddd;
+  border-radius: 4px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
