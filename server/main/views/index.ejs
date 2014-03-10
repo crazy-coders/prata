@@ -24,8 +24,8 @@
           <ul id="message-list" class="message-list">
             {{#each}}
               <li class="user-1">
-                <p><strong>{{user.username}}</strong></p>
-                <p>{{message}}</p>
+                <p><abbr title="username">{{user.username}}</abbr> says {{message}}</p>
+                <p class="posted">{{createdAt}}</p>
               </li>
             {{/each}}
           </ul>
