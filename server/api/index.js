@@ -46,6 +46,20 @@ app.get('/users',
   }
 );
 
+app.get('/users/:id',
+  function(req, res) {
+    
+    var User = Parse.Object.extend("Users");
+    var query = new Parse.Query(User);
+    query.equalTo("objectId", req.params.id);
+    query.find({
+      success: function(results) {
+        res.json({user: results});
+      }.bind(this)
+    });
+  }
+);
+
 app.post('/users', function(req, res) {
   var User = Parse.Object.extend("Users");
 

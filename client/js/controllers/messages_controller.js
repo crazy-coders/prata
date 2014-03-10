@@ -12,7 +12,8 @@ Prata.MessagesController = Ember.ArrayController.extend({
 
       var m = store.createRecord('message', {
         message: messageText,
-        createdAt: new Date()
+        createdAt: new Date(),
+        user_id: 1
       });
 
       // Clear the "New Message" text field

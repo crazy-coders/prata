@@ -8,15 +8,13 @@ Prata.Store = DS.Store.extend({
 });
 
 Prata.ApplicationSerializer = DS.RESTSerializer.extend({
-  primaryKey: 'objectId'
+  primaryKey: 'objectId',
+  keyForRelationship: function(rel, kind) {
+    if (kind === 'belongsTo') {
+      return rel + "Id";
+    } else {
+      var singular = rel.singularize();
+      return singular + "Ids";
+    }
+  }
 });
-
-//Prata.MessageSerializer = DS.RESTSerializer.extend({
-//  normalizeHash: {
-//    messages: function(hash) {
-//      console.log(hash);
-//      return hash;
-//    }
-//  }
-//});
-//
