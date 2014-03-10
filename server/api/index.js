@@ -9,12 +9,11 @@ app.use(express.json());
 
 app.get('/messages',
   function(req, res) {
-
     var Messages = Parse.Object.extend("Messages");
     var query = new Parse.Query(Messages);
     query.find({
       success: function(results) {
-        res.json(results);
+        res.json({messages: results});
       }.bind(this)
     });
   }
@@ -23,7 +22,7 @@ app.get('/messages',
 app.post('/messages', function(req, res) {
   var Messages = Parse.Object.extend("Messages");
 
-  var object = {'userId': req.body.userId, 'message': req.body.message};
+  var object = {'userId': req.body.message.userId, 'message': req.body.message.message};
   new Messages().save(object).then(
     function(trans) {
       res.send(200);
@@ -41,7 +40,7 @@ app.get('/users',
     var query = new Parse.Query(User);
     query.find({
       success: function(results) {
-        res.json(results);
+        res.json({users: results});
       }.bind(this)
     });
   }

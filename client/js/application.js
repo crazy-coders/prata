@@ -9,12 +9,8 @@ window.Prata = Ember.Application.create();
 
 Prata.Store = DS.Store.extend({
   revision: 12,
-  adapter: 'DS.RESTAdapter'
-});
-
-
-Prata.ApplicationAdapter = DS.RESTAdapter.extend();
-
-DS.RESTAdapter.reopen({
-  namespace: 'api'
+  adapter: DS.RESTAdapter.extend({
+    namespace: 'api',
+    primaryKey: 'objectId'
+  })
 });

@@ -1,5 +1,5 @@
 Prata.MessagesController = Ember.ArrayController.extend({
-  sortProperties: ['id'],
+  sortProperties: ['createdAt'],
   sortAscending: false,
   actions: {
     createMessage: function() {
@@ -12,7 +12,7 @@ Prata.MessagesController = Ember.ArrayController.extend({
 
       var m = Prata.Message.createRecord({
         message: messageText,
-        user: store.find('user', 1) // Set user
+        createdAt: new Date()
       });
 
       // Clear the "New Message" text field

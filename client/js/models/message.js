@@ -1,6 +1,10 @@
 Prata.Message = DS.Model.extend({
   message: DS.attr('string'),
-  user: DS.belongsTo('user', {async: true})
+  createdAt: DS.attr('string'),
+  updated_at: DS.attr('string'),
+  object_id: DS.attr('string'),
+  userId: DS.attr('string')
+  //user: DS.belongsTo('user', {async: true})
 });
 
 //Prata.Message.FIXTURES = [
