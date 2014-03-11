@@ -12,8 +12,32 @@ app.get('/messages',
     var Messages = Parse.Object.extend("Messages");
     var query = new Parse.Query(Messages);
     query.find({
-      success: function(results) {
-        res.json({messages: results});
+      success: function(results_messages) {
+
+        var Users = Parse.Object.extend("Users");
+        var query = new Parse.Query(Users);
+        query.find({
+          success: function(results_users) {
+            var tmp_users = {};
+            results_users.forEach(function(user) {
+              tmp_users[user.id] = {username: user.attributes.username, objectId: user.id};
+            })
+
+            var messages = [];
+            results_messages.forEach(function(message) {
+              var obj = {
+                "message" : message.attributes.message,
+                "user" : tmp_users[message.attributes.userId],
+                "createdAt": message.createdAt,
+                "objectId": message.id,
+                "userId": message.attributes.userId
+              };
+              messages.push(obj);
+            });
+
+            res.json({messages: messages});
+          }.bind(this)
+        });
       }.bind(this)
     });
   }
@@ -48,7 +72,7 @@ app.get('/users',
 
 app.get('/users/:id',
   function(req, res) {
-    
+
     var User = Parse.Object.extend("Users");
     var query = new Parse.Query(User);
     query.equalTo("objectId", req.params.id);
