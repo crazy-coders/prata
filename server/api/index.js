@@ -18,24 +18,10 @@ app.get('/messages',
         var query = new Parse.Query(Users);
         query.find({
           success: function(results_users) {
-            var tmp_users = {};
-            results_users.forEach(function(user) {
-              tmp_users[user.id] = {username: user.attributes.username, objectId: user.id};
-            })
-
-            var messages = [];
-            results_messages.forEach(function(message) {
-              var obj = {
-                "message" : message.attributes.message,
-                "user" : tmp_users[message.attributes.userId],
-                "createdAt": message.createdAt,
-                "objectId": message.id,
-                "userId": message.attributes.userId
-              };
-              messages.push(obj);
+            res.json({
+              messages: results_messages, 
+              users: results_users
             });
-
-            res.json({messages: messages});
           }.bind(this)
         });
       }.bind(this)
