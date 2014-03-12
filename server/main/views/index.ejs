@@ -17,7 +17,8 @@
         <header id="header">
           <h1>prata</h1>
               {{input id="new-message" class="pure-input-2-3" placeholder="What needs to be told?" value=newMessage action="createMessage"}}
-            <button type="submit" class="pure-button pure-button-primary">Sign in</button>
+              <button class="pure-button pure-button-primary" {{action "createMessage"}}>Post message</button>
+
         </header>
 
         <section id="main">
