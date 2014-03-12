@@ -7,6 +7,21 @@
   max-width: 768px;
 }
 
+.header {
+  position: relative;
+}
+
+  nav {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  li {
+    display: inline;
+  }
+}
+
+
 .message-list {
   padding: 0;
   margin: 0;
@@ -16,7 +31,7 @@
     margin: 0;
     padding: 0 0 .2em;
   }
-  
+
   .posted {
     font-size: 0.8em;
   }

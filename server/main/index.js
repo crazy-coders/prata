@@ -4,7 +4,11 @@ var express = require('express'),
     server = http.createServer(app),
     winston = require('winston'),
     config = require('../config'),
-    api = require('../api');
+    api = require('../api'),
+    auth = require('../auth'),
+    user = require('../user'),
+    passport = require('passport');
+
 
 
 app.configure('production', 'development', function() {
@@ -21,18 +25,29 @@ app.configure('development', function() {
 });
 
 app.configure(function() {
-  app.use(express.static('public'));
-  app.use(app.router);
+  app.use(express.static(__dirname + '/../../client'));
+  app.use(express.static(__dirname + '/../../bower_components'));
+
+  app.use(express.cookieParser());
+  app.use(express.session({secret: 'blahblah', cookie: { maxAge: 1000000000 }}));
+
   app.use('/api', api);
+  app.use('/auth', auth);
+  app.use('/user', user);
 
   app.set('views', __dirname + '/views');
   app.engine('html', require('ejs').renderFile);
 
-  app.use(express.static(__dirname + '/../../client'));
-  app.use(express.static(__dirname + '/../../bower_components'));
+  app.use(passport.initialize());
+  app.use(passport.session());
+
+  app.use(app.router);
 });
 
-app.get('/', function(req, res) {
+app.get('/', auth.ensureAuthenticatedUser, function(req, res) {
+
+  console.log(req.session);
+
   res.render('index.ejs', {title: "En title"});
 });
 
