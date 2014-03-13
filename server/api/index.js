@@ -1,11 +1,22 @@
 var express = require('express'),
     app = module.exports = express(),
     Parse = require('parse').Parse,
-    config = require('../config/');
+    passport = require('passport'),
+    auth = require('../auth'),
+    config = require('../config');
+
 
 Parse.initialize(config.parse.appId, config.parse.jsKey);
-app.use(express.urlencoded());
-app.use(express.json());
+
+app.configure(function() {
+  app.use(express.cookieParser());
+  app.use(express.session({secret: 'blahblah', cookie: { maxAge: 1000000000 }}));
+
+  app.set('views', __dirname + '/../main/views');
+  app.use(passport.initialize());
+  app.use(passport.session());
+  app.all('*', auth.ensureAuthenticatedUser);
+});
 
 app.get('/messages',
   function(req, res) {
