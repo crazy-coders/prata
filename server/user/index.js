@@ -11,8 +11,9 @@ app.configure(function() {
   app.set('views', __dirname + '/../main/views');
   app.use(passport.initialize());
   app.use(passport.session());
-}
+  app.all('*', auth.ensureAuthenticatedUser);
+});
 
-app.get('/', auth.ensureAuthenticatedUser, function(req, res) {
+app.get('/', function(req, res) {
   res.render('user.ejs', {user: req.user});
 });
