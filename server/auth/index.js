@@ -1,9 +1,14 @@
 var express = require('express'),
     app = module.exports = express(),
-    passport = require('passport'),
 
+    passport = require('passport'),
     GitHubStrategy = require('passport-github').Strategy,
+
+    Parse = require('parse').Parse,
+
     config = require('../config');
+
+Parse.initialize(config.parse.appId, config.parse.jsKey);
 
 app.configure(function() {
   app.use(express.cookieParser());
@@ -16,7 +21,7 @@ app.configure(function() {
 
 // No idea how to test this
 passport.serializeUser(function(user, done) {
-  var tmp = {id: String(user.id), username: String(user.username)}; // Make sure to always use a string
+  var tmp = {githubId: String(user.id), username: String(user.username), objectId: user.objectId}; // Make sure to always use a string
   done(null, tmp);
 });
 
@@ -25,7 +30,40 @@ passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
 
-passport.use(new GitHubStrategy( config.auth.github, function(accessToken, refreshToken, profile, done) { done(null, profile); } ));
+passport.use(new GitHubStrategy(config.auth.github,
+  function(accessToken, refreshToken, profile, done) {
+
+    var User = Parse.Object.extend("Users"),
+    query = new Parse.Query(User);
+
+    query.equalTo("githubId", profile.id);
+    query.find({
+      success: function(results) {
+
+        if (results.length === 0)
+        {
+          new User().save({'username': profile.username, 'githubId': profile.id}).then(
+          function(trans) {
+            profile.objectId = trans.id;
+            done(null, profile);
+          }.bind(this),
+          function(error) {
+            console.log(error);
+          }.bind(this));
+        }
+        else
+        {
+          profile.objectId = results[0].id;
+          done(null, profile);
+        }
+      }.bind(this),
+      error: function(err) {
+        console.log(err);
+      }
+    });
+  }
+));
+
 app.get('/github',   passport.authenticate('github'));
 
 // This needs to check for valid return handling
@@ -50,7 +88,7 @@ app.get('/logout', function(req, res){
 app.ensureAuthenticatedUser = function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated())
   {
-    if (config.auth.github.ids.indexOf(req.user.id) !== -1)
+    if (config.auth.github.ids.indexOf(req.user.githubId) !== -1)
     {
       return next();
     }
