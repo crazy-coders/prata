@@ -9,6 +9,9 @@ var express = require('express'),
 Parse.initialize(config.parse.appId, config.parse.jsKey);
 
 app.configure(function() {
+  app.use(express.json());
+  app.use(express.urlencoded());
+
   app.use(express.cookieParser());
   app.use(express.session({secret: 'blahblah', cookie: { maxAge: 1000000000 }}));
 
@@ -30,7 +33,7 @@ app.get('/messages',
         query.find({
           success: function(results_users) {
             res.json({
-              messages: results_messages, 
+              messages: results_messages,
               users: results_users
             });
           }.bind(this)
@@ -43,7 +46,7 @@ app.get('/messages',
 app.post('/messages', function(req, res) {
   var Messages = Parse.Object.extend("Messages");
 
-  var object = {'userId': req.body.message.userId, 'message': req.body.message.message};
+  var object = {'userId': req.user.objectId, 'message': req.body.message.message};
   new Messages().save(object).then(
     function(trans) {
       res.send(200);
