@@ -5,6 +5,9 @@ var express = require('express'),
     config = require('../config');
 
 app.configure(function() {
+  app.use(express.json());
+  app.use(express.urlencoded());
+
   app.use(express.cookieParser());
   app.use(express.session({secret: 'blahblah', cookie: { maxAge: 1000000000 }}));
 
