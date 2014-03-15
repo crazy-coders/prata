@@ -21,7 +21,7 @@ app.configure(function() {
 
 // No idea how to test this
 passport.serializeUser(function(user, done) {
-  var tmp = {githubId: String(user.id), username: String(user.username), objectId: user.objectId}; // Make sure to always use a string
+  var tmp = {githubId: String(user.id), username: String(user.username), objectId: user.objectId, color: String(user.color)}; // Make sure to always use a string
   done(null, tmp);
 });
 
@@ -53,6 +53,7 @@ passport.use(new GitHubStrategy(config.auth.github,
         }
         else
         {
+          profile.color = results[0].get('color');
           profile.objectId = results[0].id;
           done(null, profile);
         }
