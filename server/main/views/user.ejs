@@ -1,3 +1,17 @@
-<%= user.username %>
-<%= user.objectId %>
-<%= user.githubId %>
+<% include head %>
+<div class="content">
+<h1>Your profile: <%= user.username %></h1>
+<form class="pure-form pure-form-aligned" action="/api/users/<%= user.objectId %>" method="POST">
+    <fieldset>
+        <div class="pure-control-group">
+            <label for="email">Hex color</label>
+            <input id="color" name="color" type="text" placeholder="#00f" value="<%= user.color %>">
+        </div>
+
+        <div class="pure-controls">
+            <button type="submit" class="pure-button pure-button-primary">Update</button>
+        </div>
+    </fieldset>
+</form>
+</div>
+<% include foot %>
