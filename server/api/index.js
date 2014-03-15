@@ -84,6 +84,25 @@ app.get('/users/:id',
   }
 );
 
+app.post('/users/:id',
+  function(req, res) {
+
+    var User = Parse.Object.extend("Users");
+    var user = new User();
+    user.id = req.params.id;
+    user.set("color", req.body.color);
+
+    user.save(null, {
+      success: function(point) {
+        res.redirect('/user');
+      },
+      error: function(point, error) {
+        res.redirect('/user');
+      }
+    });
+  }
+);
+
 app.post('/users', function(req, res) {
   var User = Parse.Object.extend("Users");
 
