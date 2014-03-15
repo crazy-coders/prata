@@ -7,6 +7,10 @@
   margin-top: 1em;
 }
 
+.w100 {
+  width: 100%;
+}
+
 .content {
   margin-left: auto;
   margin-right: auto;
@@ -68,7 +72,6 @@
 }
 
 input[type=text] {
-  width: 100%;
   padding: .5em .6em;
   display: inline-block;
   border: 1px solid #ccc;
