@@ -5,7 +5,7 @@
   "main": "server/main/index.js",
   "scripts": {
     "start": "node ./server/main/index",
-    "test": "NODE_ENV=testing mocha -R spec --recursive server"
+    "test": "find ./server -name '*_test.js' | NODE_ENV=testing  xargs mocha -R spec"
   },
   "author": "",
   "contributors": [
