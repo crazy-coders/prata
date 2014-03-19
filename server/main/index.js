@@ -10,23 +10,25 @@ var express = require('express'),
     passport = require('passport');
 
 
+var log = new (winston.Logger)({
+    transports: [
+        new (winston.transports.Console)({ level : 'silly' })
+    ]
+});
+
 
 app.configure('production', 'development', function() {
   var winstonStream = {
     write: function(message, encoding){
-      winston.info(message.slice(0, -1));
+      log.info(message.slice(0, -1));
     }
   };
   app.use(express.logger({stream:winstonStream}));
 });
 
-app.configure('development', function() {
-  winston.setLevels(winston.config.syslog.levels);
-});
 
 app.configure('testing', function() {
-
-  console.log(winston.levels);
+  log.transports.console.level = 'error';
 });
 
 app.configure(function() {
@@ -55,4 +57,4 @@ app.get('/', auth.ensureAuthenticatedUser, function(req, res) {
 
 
 server.listen(config.server.port);
-winston.info('Listening on port '+config.server.port);
+log.info('Listening on port '+config.server.port);
