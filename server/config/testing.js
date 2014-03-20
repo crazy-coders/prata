@@ -9,5 +9,5 @@ module.exports = {
       'clientSecret': 'bar',
       'ids': ['123']
     }
-  },
+  }
 };

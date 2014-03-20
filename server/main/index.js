@@ -1,7 +1,7 @@
 var express = require('express'),
     http = require('http'),
     app = exports.app = express(),
-    server = http.createServer(app),
+    server = exports.server = http.createServer(app),
     winston = require('winston'),
     config = require('../config'),
     api = require('../api'),
@@ -54,7 +54,6 @@ app.configure(function() {
 app.get('/', auth.ensureAuthenticatedUser, function(req, res) {
   res.render('index.ejs', {title: "En title"});
 });
-
 
 server.listen(config.server.port);
 log.info('Listening on port '+config.server.port);
