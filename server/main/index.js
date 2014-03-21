@@ -1,7 +1,7 @@
 var express = require('express'),
     http = require('http'),
     app = exports.app = express(),
-    server = http.createServer(app),
+    server = exports.server = http.createServer(app),
     winston = require('winston'),
     config = require('../config'),
     api = require('../api'),
@@ -10,20 +10,30 @@ var express = require('express'),
     passport = require('passport');
 
 
+var log = new (winston.Logger)({
+    transports: [
+        new (winston.transports.Console)({ level : 'silly' })
+    ]
+});
+
 
 app.configure('production', 'development', function() {
   var winstonStream = {
     write: function(message, encoding){
-      winston.info(message.slice(0, -1));
+      log.info(message.slice(0, -1));
     }
   };
   app.use(express.logger({stream:winstonStream}));
 });
 
-app.configure('development', function() {
-  winston.setLevels(winston.config.syslog.levels);
+
+<<<<<<< HEAD
+=======
+app.configure('testing', function() {
+  log.transports.console.level = 'error';
 });
 
+>>>>>>> FETCH_HEAD
 app.configure(function() {
   app.use(express.static(__dirname + '/../../client'));
   app.use(express.static(__dirname + '/../../bower_components'));
@@ -48,6 +58,5 @@ app.get('/', auth.ensureAuthenticatedUser, function(req, res) {
   res.render('index.ejs', {title: "En title"});
 });
 
-
 server.listen(config.server.port);
-winston.info('Listening on port '+config.server.port);
+log.info('Listening on port '+config.server.port);

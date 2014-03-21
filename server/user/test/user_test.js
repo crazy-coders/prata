@@ -2,27 +2,18 @@ var assert = require('chai').assert,
     nock = require('nock'),
     config = require('../../config');
 
-var app = require('../index').app,
+var app = require('../../main/index').app,
     request = require('supertest')(app);
 
-
-describe('Make sure config works', function() {
-  it("should have all needed settings in config");
-});
-
-<<<<<<< HEAD
-describe('Main unauthorized', function(){
-=======
-
-describe('Main', function(){
->>>>>>> FETCH_HEAD
+describe('User', function(){
 
   // Remove the isAuthenticated mock function.
   after(function() {
     app.stack.shift();
   });
 
-  it("should redirect to /auth/login if not authorized when trying to access /", function() {
+
+  it("should redirect to /auth/login if not authorized when trying to access /user", function() {
     request
     .get('/')
     .expect(302)
@@ -31,18 +22,7 @@ describe('Main', function(){
     });
   });
 
-<<<<<<< HEAD
-});
-
-describe('Main authorized', function(){
-  it("should let you view / if authorized ");
-});
-
-
-describe('Make sure config works', function() {
-  it("should have all needed settings in config");
-=======
-  it("should let you view / if authorized with the correct ids", function() {
+  it("should let you view /user if authorized with the correct ids", function() {
 
     app.stack.unshift({ // First middleware
       route: '',
@@ -65,5 +45,4 @@ describe('Make sure config works', function() {
     });
   });
 
->>>>>>> FETCH_HEAD
 });
