@@ -70,6 +70,12 @@ app.get('/users',
   }
 );
 
+app.get('/users/current',
+  function(req, res) {
+    res.json({user: req.user});
+  }
+);
+
 app.get('/users/:id',
   function(req, res) {
 
