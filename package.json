@@ -5,7 +5,8 @@
   "main": "server/main/index.js",
   "scripts": {
     "start": "node ./server/main/index",
-    "test": "find ./server -name '*_test.js' | NODE_ENV=testing  xargs mocha -R spec"
+    "test": "find ./server -name '*_test.js' | NODE_ENV=testing  xargs mocha -R spec",
+    "prestart": "npm test"
   },
   "author": "",
   "contributors": [
