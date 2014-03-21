@@ -11,7 +11,6 @@ describe('Make sure config works', function() {
   it("should have all needed settings in config");
 });
 
-
 describe('Main unauthorized', function(){
 
   beforeEach(function() {
@@ -34,11 +33,6 @@ describe('Main unauthorized', function(){
 describe('Main authorized', function(){
   it("should let you view / if authorized ");
 });
-
-
-
-
-
 
 
 describe('Make sure config works', function() {

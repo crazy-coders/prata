@@ -24,11 +24,6 @@ app.configure('development', function() {
   winston.setLevels(winston.config.syslog.levels);
 });
 
-app.configure('testing', function() {
-
-  console.log(winston.levels);
-});
-
 app.configure(function() {
   app.use(express.static(__dirname + '/../../client'));
   app.use(express.static(__dirname + '/../../bower_components'));
