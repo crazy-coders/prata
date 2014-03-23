@@ -27,13 +27,7 @@ app.configure('production', 'development', function() {
 });
 
 
-<<<<<<< HEAD
-=======
-app.configure('testing', function() {
-  log.transports.console.level = 'error';
-});
 
->>>>>>> FETCH_HEAD
 app.configure(function() {
   app.use(express.static(__dirname + '/../../client'));
   app.use(express.static(__dirname + '/../../bower_components'));

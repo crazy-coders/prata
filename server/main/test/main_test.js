@@ -10,12 +10,9 @@ describe('Make sure config works', function() {
   it("should have all needed settings in config");
 });
 
-<<<<<<< HEAD
-describe('Main unauthorized', function(){
-=======
 
 describe('Main', function(){
->>>>>>> FETCH_HEAD
+
 
   // Remove the isAuthenticated mock function.
   after(function() {
@@ -31,17 +28,6 @@ describe('Main', function(){
     });
   });
 
-<<<<<<< HEAD
-});
-
-describe('Main authorized', function(){
-  it("should let you view / if authorized ");
-});
-
-
-describe('Make sure config works', function() {
-  it("should have all needed settings in config");
-=======
   it("should let you view / if authorized with the correct ids", function() {
 
     app.stack.unshift({ // First middleware
@@ -65,5 +51,4 @@ describe('Make sure config works', function() {
     });
   });
 
->>>>>>> FETCH_HEAD
 });
