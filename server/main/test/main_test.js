@@ -2,8 +2,9 @@ var assert = require('chai').assert,
     nock = require('nock'),
     config = require('../../config');
 
-var app = require('../index').app,
-    request = require('supertest')(app);
+var app,
+    request;
+
 
 
 describe('Make sure config works', function() {
@@ -14,13 +15,18 @@ describe('Make sure config works', function() {
 describe('Main', function(){
 
 
-  // Remove the isAuthenticated mock function.
-  after(function() {
-    app.stack.shift();
+  beforeEach(function() {
+    app = require('../index').app;
+    request = require('supertest');
   });
 
+  afterEach(function () {
+    delete require.cache[require.resolve('../index')];
+    delete require.cache[require.resolve('supertest')];
+  })
+
   it("should redirect to /auth/login if not authorized when trying to access /", function() {
-    request
+    request(app)
     .get('/')
     .expect(302)
     .end(function(err, res){
@@ -28,27 +34,5 @@ describe('Main', function(){
     });
   });
 
-  it("should let you view / if authorized with the correct ids", function() {
-
-    app.stack.unshift({ // First middleware
-      route: '',
-      handle: function (req, res, next) {
-        req.user = {githubId: config.auth.github.ids[0]};
-
-        req.isAuthenticated = function () {
-          return true;
-        };
-
-        next();
-      }
-    });
-
-    request
-    .get('/')
-    .expect(200)
-    .end(function(err, res){
-      if (err) throw err;
-    });
-  });
-
+  it("should let you view / if authorized with the correct ids");
 });
